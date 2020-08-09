@@ -15,7 +15,7 @@
                     <div class="my-2">
                         <div class="font-bold">
                             Plan: <a href="https://dashboard.paystack.com/#/plans/{{ $subscription['plan_id'] }}" target="_blank">
-                            {{ $subscription['plan'] }}
+                            {{ $subscription['plan'] }} ({{$subscription['plan_interval']}})
                             </a>
                         </div>
                         <div class="text-sm {{ ($subscription['status']=='active')? 'text-green-700' : 'text-red-700' }}">
@@ -31,10 +31,10 @@
                             Amount: {{ $subscription['currency'] }} {{ $subscription['amount'] }}
                         </div>
                         <div class="text-sm text-dimmed">
-                            Next payment date: {{$subscription['next_payment_date']}}
+                            Next Payment: {{$subscription['next_payment_date']}}
                         </div>
                         <div class="text-sm text-dimmed">
-                            Date: {{$subscription['createdAt']}}
+                            Created: {{$subscription['createdAt']}}
                         </div>
                     </div>
                 </li>

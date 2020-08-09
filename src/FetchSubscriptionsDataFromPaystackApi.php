@@ -21,7 +21,7 @@ class FetchSubscriptionsDataFromPaystackApi extends Command
 
         $subscriptions = Subscription::list(
             config('dashboard.tiles.paystack.subscriptions.params') ?? [
-                'perPage' => 5,
+                'perPage' => 4,
             ]
         );
 
@@ -31,9 +31,12 @@ class FetchSubscriptionsDataFromPaystackApi extends Command
                     'customer' => $subscription->customer->email,
                     'plan' => $subscription->plan->name,
                     'plan_id' => $subscription->plan->id,
+                    'plan_interval' => $subscription->plan->interval,
                     'status' => $subscription->status,
                     'start' => $subscription->start,
                     'quantity' => $subscription->quantity,
+                    'currency' => $subscription->plan->currency,
+                    'subsctiption_code' => $subscription->subscription_code,
                     'amount' => $this->formatMoney($subscription->amount),
                     'next_payment_date' => Carbon::parse($subscription->next_payment_date)
                         ->setTimezone('UTC')

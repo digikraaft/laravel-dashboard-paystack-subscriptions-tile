@@ -1,4 +1,4 @@
-# A tile to show list of Paystack Customers on Laravel Dashboard
+# A tile to show list of Paystack Subscriptions on Laravel Dashboard
 ![run-tests](https://github.com/digikraaft/laravel-dashboard-paystack-subscriptions-tile/workflows/run-tests/badge.svg)
 [![Build Status](https://scrutinizer-ci.com/g/digikraaft/laravel-dashboard-paystack-subscriptions-tile/badges/build.png?b=master)](https://scrutinizer-ci.com/g/digikraaft/laravel-dashboard-paystack-subscriptions-tile/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/digikraaft/laravel-dashboard-paystack-subscriptions-tile/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/digikraaft/laravel-dashboard-paystack-subscriptions-tile/?branch=master)
@@ -35,7 +35,7 @@ In the `dashboard` config file, you can optionally add this configuration in the
                  * @link https://paystack.com/docs/api/#subscription-list
                  */
                 'params' => [
-                    'perPage' => 5,
+                    'perPage' => 4,
                 ],
 
                 /**
@@ -47,15 +47,15 @@ In the `dashboard` config file, you can optionally add this configuration in the
     ],
 ```
 You must set your `PAYSTACK_SECRET` in the `.env` file. You can get this from your Paystack dashboard. 
-To load subscriptions data from Paystack, you need to schedule the `FetchTransactionsDataFromPaystackApi`
+To load subscriptions data from Paystack, you need to schedule the `FetchSubscriptionsDataFromPaystackApi`
 command:
 ```
 // in app/Console/Kernel.php
-use Digikraaft\PaystackTransactionsTile\FetchTransactionsDataFromPaystackApi;
+use Digikraaft\PaystackSubscriptionsTile\FetchSubscriptionsDataFromPaystackApi;
 
 protected function schedule(Schedule $schedule)
 {
-    $schedule->command(FetchTransactionsDataFromPaystackApi::class)->daily();
+    $schedule->command(FetchSubscriptionsDataFromPaystackApi::class)->daily();
 }
 ```
 You can change the frequency of the schedule as desired. You can also use the
@@ -71,16 +71,16 @@ In your dashboard view you use the `livewire:paystack-subscriptions-tile` compon
 You can add an optional title:
 ```html
 <x-dashboard>
-    <livewire:paystack-subscriptions-tile position="e7:e16" title="Paystack Transactions" />
+    <livewire:paystack-subscriptions-tile position="e7:e16" title="Paystack Subscriptions" />
 </x-dashboard>
 ```
 
 ## Pagination
-The package paginates data by default. The default value is 5. This can be changed by adding a `perPage`
+The package paginates data by default. The default value is 4. This can be changed by adding a `perPage`
 property to the tile:
 ```html
 <x-dashboard>
-    <livewire:paystack-subscriptions-tile position="e7:e16" title="Paystack Transactions" perPage="10" />
+    <livewire:paystack-subscriptions-tile position="e7:e16" title="Paystack Subscriptions" perPage="10" />
 </x-dashboard>
 ```
 
